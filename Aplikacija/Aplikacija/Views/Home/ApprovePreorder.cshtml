@@ -1,0 +1,40 @@
+﻿@model Aplikacija.Preorders
+
+@{
+    ViewBag.Title = "ApprovePreorder";
+
+    bool isApproved = (bool)Model.IsApproved;
+}
+
+<div class="inner-container">
+    @Html.ActionLink("Back", "Preorders", new { } , new { @class = "btn btn-primary btn-md back-btn" })
+    @Html.ActionLink("Delete", "PreorderDelete", new { id = Model.Id } , new { @class = "btn btn-danger btn-md delete-btn" })
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color text-center">
+            @if (isApproved)
+            {
+                <h2>You want to disable this preorder?</h2>
+                <input type="submit" value="Disable" class="btn btn-warning btn-lg submit-btn" />
+            }
+            else
+            {
+                <h2>You want to approve this preorder?</h2>
+                <input type="submit" value="Approve" class="btn btn-success btn-lg submit-btn" />
+            }
+        </div>
+    }
+    <hr />
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <h1 class="desc-text">@Model.FirstName @Model.LastName</h1>
+
+            <h4 class="desc-text">Address: @Model.Address</h4>
+            <h4 class="desc-text">Email: @Model.Email</h4>
+            <h4 class="desc-text">Signed Up: @Model.SignUpDate.ToShortDateString()</h4>
+            <h4 class="desc-text">Phone: @Model.Phone</h4>
+        </div>
+    </div>
+</div>

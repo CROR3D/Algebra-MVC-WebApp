@@ -1,0 +1,22 @@
+﻿<ul class="nav navbar-nav navbar-right">
+    @if (Request.Cookies["authCookie"] != null)
+    {
+        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Register" ? "links-active" : "")">@Html.ActionLink("Register New", "Register", "Auth", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li class="auth-btn">
+            <a href="@Url.Action("Logout", "Auth")">
+                <i class="glyphicon glyphicon-log-out"></i>
+                <span>&nbsp Log Out</span>
+            </a>
+        </li>
+    }
+    else
+    {
+        <li class="auth-btn log-in-right">
+            <a href="@Url.Action("Login", "Auth")">
+                <i class="glyphicon glyphicon-log-in"></i>
+                <span>&nbsp Log In</span>
+            </a>
+        </li>
+    }
+</ul>
+

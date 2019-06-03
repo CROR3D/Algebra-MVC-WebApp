@@ -1,0 +1,20 @@
+﻿@{
+    string text = (string)TempData["FlashMessage.Text"];
+    string cssClass = "";
+
+    if (!string.IsNullOrWhiteSpace(text))
+    {
+        string type = (string)TempData["FlashMessage.Type"];
+        cssClass = "alert-" + type;
+    }
+}
+
+@if (!string.IsNullOrWhiteSpace(text))
+{
+    <div class="alert @cssClass alert-dismissible show submit-btn" role="alert">
+        @text
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}

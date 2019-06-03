@@ -1,0 +1,32 @@
+﻿@model Aplikacija.Courses
+
+@{
+    ViewBag.Title = "CourseDetails";
+}
+
+<div class="inner-container">
+    @Html.ActionLink("Back", "Courses", new { } , new { @class = "btn btn-primary btn-md back-btn" })
+    <hr />
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <h1 class="desc-text">@Model.Name</h1>
+
+            @{
+                string[] shortDescription = Model.Description.Split('|');
+            }
+
+            @for (int i = 0; i < shortDescription.Length; i++)
+            {
+                if (i == shortDescription.Length - 1)
+                {
+                    <p class="desc-text">@shortDescription[i]</p>
+                    break;
+                }
+
+                <p>@shortDescription[i]</p>
+            }
+
+            <h3 class="desc-text"><span class="text-info">Starting date: </span>@Model.StartDate.ToShortDateString()</h3>
+        </div>
+    </div>
+</div>

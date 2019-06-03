@@ -1,0 +1,19 @@
+﻿@model Aplikacija.Employees
+
+@{
+    ViewBag.Title = "DeleteEmployee";
+}
+
+<div class="inner-container">
+    @Html.ActionLink("Back", "ShowEmployees", new { }, new { @class = "btn btn-primary btn-md back-btn" })
+
+    @using (Html.BeginForm(Model))
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-actions no-color text-center">
+            <h2>Are you sure you want to delete this employee?</h2>
+            <input type="submit" value="Delete" class="btn btn-danger btn-lg submit-btn" />
+        </div>
+    }
+</div>

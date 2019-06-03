@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Aplikacija.Employees>
+
+@{
+    ViewBag.Title = "ShowEmployees";
+
+    int number = 1;
+}
+
+<div class="inner-container">
+    <h2 class="text-center">Registered employees</h2>
+    <br />
+    <table class="table">
+        <tr>
+            <th>No.</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @number.
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteEmployee", new { id = item.Id }, new { @class = "btn btn-danger btn-md" })
+                </td>
+            </tr>
+
+            number++;
+        }
+    </table>
+</div>

@@ -1,0 +1,57 @@
+﻿@{ 
+    HttpCookie cookie = Request.Cookies["authCookie"];
+
+    bool DoesExist = (cookie == null) ? false : true;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ASP.NET Hrvoje Siric</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Algebra", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul id="linksNav" class="nav navbar-nav">
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Courses" ? "links-active" : "")">@Html.ActionLink("Browse Courses", "Courses", "Home")</li>
+                    @Html.Partial("Partials/_LinksPartial")
+                </ul>
+                @Html.Partial("Partials/_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        @if (DoesExist)
+        {
+            string username = cookie["username"];
+
+            <div class="pull-right inner-container welcome">
+                <p>Welcome, <span class="text-danger">@username</span></p>
+            </div>
+        }
+    </div>
+    <div class="container @(DoesExist ? " " : "submit-btn")">
+        @Html.Partial("Partials/_FlashMessagePartial")
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

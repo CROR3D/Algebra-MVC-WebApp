@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Aplikacija.Preorders>
+
+@{
+    ViewBag.Title = "Preorders";
+
+    int number = 1;
+    int preorderCount = Model.Count();
+
+    List<Courses> preorderCourses = (List<Courses>) ViewBag.PreorderCourses;
+}
+
+<div class="inner-preorder-container">
+    <h2 class="text-center">Preorders for @ViewBag.Generation</h2>
+    <br />
+    <div class="preorder-table">
+        <div class="container-fluid">
+            <div id="preorderTitleRow" class="preorder-row">
+                <div class="preorder-col">
+                    No.
+                </div>
+                <div class="preorder-col">
+                    @Html.DisplayName("First Name")
+                </div>
+                <div class="preorder-col">
+                    @Html.DisplayName("Last Name")
+                </div>
+                <div class="preorder-col">
+                    @Html.DisplayName("View Details")
+                </div>
+            </div>
+
+            @if (preorderCount == 0)
+            {
+                <div class="row no-listings">
+                    <h2>No preorders submited</h2>
+                </div>
+            }
+
+            @foreach (Courses course in preorderCourses)
+            {
+                <div class="course-title text-center">
+                    @course.Name @course.StartDate.ToShortDateString()
+                    <div class="pull-right">
+                        <i class="glyphicon glyphicon-chevron-down"></i>
+                    </div>
+                </div>
+
+                number = 1;
+
+                <div class="preorder-group">
+                    @foreach (var item in Model)
+                    {
+                        if (item.CourseId == course.Id)
+                        {
+                            <div class="preorder-row">
+                                <div class="preorder-col">
+                                    @number.
+                                </div>
+                                <div class="preorder-col">
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </div>
+                                <div class="preorder-col">
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </div>
+                                @if (item.IsApproved != null && item.IsApproved == true)
+                                {
+                                    <div class="preorder-col approved">
+                                        @Html.ActionLink("Approved", "ApprovePreorder", new { id = item.Id })
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="preorder-col not-approved">
+                                        @Html.ActionLink("Not Approved", "ApprovePreorder", new { id = item.Id })
+                                    </div>
+                                }
+                            </div>
+
+                            number++;
+                        }
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Resources/JavaScript/dropdown_course.js"></script>
+}

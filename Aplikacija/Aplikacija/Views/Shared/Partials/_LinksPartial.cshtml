@@ -1,0 +1,6 @@
+﻿@if (Request.Cookies["authCookie"] != null)
+{
+    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "ManageCourses" ? "links-active" : "")">@Html.ActionLink("Manage Courses", "ManageCourses", "Home")</li>
+    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Preorders" ? "links-active" : "")">@Html.ActionLink("Preorders", "Preorders", "Home")</li>
+}
+

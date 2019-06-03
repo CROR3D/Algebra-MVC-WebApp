@@ -1,0 +1,41 @@
+﻿@model Aplikacija.Courses
+
+@{
+    ViewBag.Title = "CourseDelete";
+}
+
+<div class="inner-container">
+    @Html.ActionLink("Back", "ManageCourses", new { } , new { @class = "btn btn-primary btn-md back-btn" })
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color text-center">
+            <h2>Are you sure you want to delete this course?</h2>
+            <input type="submit" value="Delete" class="btn btn-danger btn-lg submit-btn" />
+        </div>
+    }
+    <hr />
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <h1 class="desc-text">@Model.Name</h1>
+
+            @{
+                string[] shortDescription = Model.Description.Split('|');
+            }
+
+            @for (int i = 0; i < shortDescription.Length; i++)
+            {
+                if (i == shortDescription.Length - 1)
+                {
+                    <p class="desc-text">@shortDescription[i]</p>
+                    break;
+                }
+
+                <p>@shortDescription[i]</p>
+            }
+
+            <h3 class="desc-text"><span class="text-danger">Starting date: </span>@Model.StartDate.ToShortDateString()</h3>
+        </div>
+    </div>
+</div>
